@@ -11,40 +11,21 @@ public class test {
     public static void main(String[] args) {
         Scanner consola = new Scanner(System.in);
 
-        /* PRUEBA CREAR UN OBJETO CuentaBancaria Básico */
-        System.out.println("Dime el nombre del titular: ");
-        String nombre = consola.nextLine();
+        Persona t1 = new Persona("fer1", "uri1", "20/03/1978");
+        CodigoCuenta ccc1 = new CodigoCuenta("01234567890123456789");
+        CuentaBancaria c1 = new CuentaBancaria(t1, ccc1, 1000);
 
-        System.out.println("Dime apellidos del titular: ");
-        String apellidos = consola.nextLine();
+        Persona t2 = new Persona("fer2", "uri2", "13/06/2000");
+        CodigoCuenta ccc2 = new CodigoCuenta("01234567890123456789");
+        CuentaBancaria c2 = new CuentaBancaria(t2, ccc2, 1000);
 
-        System.out.println("Fecha Nacimiento del titular: ");
-        String fecha_nac = consola.nextLine();
+        Persona t3 = new Persona("fer3", "uri3", "06/12/1956");
+        CodigoCuenta ccc3 = new CodigoCuenta("01234567890123456789");
+        CuentaBancaria c3 = new CuentaBancaria(t3, ccc3, 1000);
 
-        Persona titular = new Persona(nombre, apellidos, fecha_nac);
-
-        String codigoCuenta;
-        do {
-            System.out.println("Escribe el número de cuenta: ");
-            codigoCuenta = consola.nextLine();
-            //codCompleto = "01234567890123456789";
-        } while (!CodigoCuenta.validarCCC(codigoCuenta));
-
-        CodigoCuenta cuentaCliente = new CodigoCuenta(codigoCuenta);
-
-        System.out.println("Dime el Saldo:");
-        double saldo = consola.nextInt();
-
-        CuentaBancaria miCuenta = new CuentaBancaria(titular, cuentaCliente, saldo);
-
-        //System.out.println("Los datos de la cuenta creada son:\n " + miCuenta.toString());
-
-        ArrayList<CuentaBancaria> cuentas = new ArrayList<>();
-        cuentas.add(miCuenta);
-
-        for (int i = 0; i < cuentas.size(); i++) {
-            System.out.println("Numeros " + cuentas.get(i));
-        }
+        //CuentaBancaria.imprimirCuentas();
+        CuentaBancaria.listarCuentas();
+        c3.buscarCuenta("fer3");
 
     }
 }
