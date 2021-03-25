@@ -6,6 +6,6 @@ public interface IImprimir {
 
     public abstract String detallesCuenta();
 
-    public abstract String imprimirSaldo();
+    public abstract void imprimirSaldo(int indice);
 
 }

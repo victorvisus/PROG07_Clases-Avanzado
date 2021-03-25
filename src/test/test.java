@@ -3,7 +3,9 @@ package test;
 import com.cypherstudios.gestionCuenta.CodigoCuenta;
 import com.cypherstudios.gestionCuenta.CuentaBancaria;
 import com.cypherstudios.gestionCuenta.Persona;
+
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class test {
@@ -22,10 +24,20 @@ public class test {
         Persona t3 = new Persona("fer3", "uri3", "06/12/1956");
         CodigoCuenta ccc3 = new CodigoCuenta("01234567890123456789");
         CuentaBancaria c3 = new CuentaBancaria(t3, ccc3, 1000);
-
         //CuentaBancaria.imprimirCuentas();
+
         CuentaBancaria.listarCuentas();
-        c3.buscarCuenta("fer3");
+
+        System.out.println("¿de qué cuenta quieres saber el saldo?"
+                + "\nDime el nombre del titular:");
+        String nombreTit = consola.nextLine();
+
+        //CuentaBancaria.buscarCuenta(nombreTit);
+        System.out.println(CuentaBancaria.buscarCuenta(nombreTit));
+
+        //CuentaBancaria.cuentasClientes.get(2).consultarSaldo(CuentaBancaria.buscarCuenta("fer3"));
+
+        System.out.println("");
 
     }
 }

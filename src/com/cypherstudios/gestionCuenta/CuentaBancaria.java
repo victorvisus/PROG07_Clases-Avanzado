@@ -30,6 +30,10 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
         this.saldo = saldo;
     }
 
+    public int getIdCuenta() {
+        return this.idCuenta;
+    }
+
     // Métodos de la Clase CuentaBancaria
     /**
      *
@@ -45,17 +49,20 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
      *
      * @return int : número de posición en el que se encuentra. -1 si no existe
      */
-    public void buscarCuenta(String titular) {
+    public static int buscarCuenta(String titular) {
 
         //String titular = "fer1";
-        int indice = cuentasClientes.indexOf(CuentaBancaria.this.titular.getNombre());
-
-        if (indice != -1) {
-            System.out.println("La búsqueda está en el índice " + indice);
-            consultarSaldo(indice);
-        } else {
-            System.out.println("El elemento no existe");
+        int indice = -1;
+        for (int i = 0; i < cuentasClientes.size(); i++) {
+            if (cuentasClientes.get(i).titular.getNombre() == titular) {
+                indice = i;
+            }
         }
+        if (indice == -1) {
+            System.out.println("La cuenta no existe");
+        }
+
+        return indice;
 
     }
 
@@ -90,11 +97,8 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
 
     @Override
     public double consultarSaldo(int indice) {
-        System.out.println("Pendiente implementar");
 
-        double saldo = this.getSaldo();
-
-        return saldo;
+        return cuentasClientes.get(indice).getSaldo();
     }
 
     //Interface: IImprimir
@@ -105,8 +109,11 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
     }
 
     @Override
-    public String imprimirSaldo() {
-        return "Pendiente implementar";
+    public void imprimirSaldo(int indice) {
+
+        System.out.println("El saldo de la cuenta Nº "
+                + cuentasClientes.get(indice).getIdCuenta() + " es: "
+                + consultarSaldo(indice));
     }
 
 }
