@@ -7,8 +7,8 @@ public class Persona {
     private String fecha_nac;
 
     public Persona(String nombre, String apellidos, String fecha_nac) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.nombre = nombre.toUpperCase();
+        this.apellidos = apellidos.toUpperCase();
         this.fecha_nac = fecha_nac;
     }
 

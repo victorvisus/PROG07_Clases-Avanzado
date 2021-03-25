@@ -49,18 +49,18 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
      *
      * @return int : número de posición en el que se encuentra. -1 si no existe
      */
-    public static int buscarCuenta(String titular) {
+    public static int buscarCuenta(String nombreTit) {
 
         //String titular = "fer1";
         int indice = -1;
         for (int i = 0; i < cuentasClientes.size(); i++) {
-            if (cuentasClientes.get(i).titular.getNombre() == titular) {
+            System.out.println("Nombre indice " + i + ": "
+                    + cuentasClientes.get(i).titular.getNombre());
+            if (cuentasClientes.get(i).titular.getNombre() == nombreTit) {
                 indice = i;
             }
         }
-        if (indice == -1) {
-            System.out.println("La cuenta no existe");
-        }
+
 
         return indice;
 
@@ -95,10 +95,9 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
         System.out.println("Pendiente implementar");
     }
 
-    @Override
-    public double consultarSaldo(int indice) {
+    public void consultarSaldo(int indice) {
+        imprimirSaldo(cuentasClientes.get(indice).getSaldo());
 
-        return cuentasClientes.get(indice).getSaldo();
     }
 
     //Interface: IImprimir
@@ -109,11 +108,8 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
     }
 
     @Override
-    public void imprimirSaldo(int indice) {
-
-        System.out.println("El saldo de la cuenta Nº "
-                + cuentasClientes.get(indice).getIdCuenta() + " es: "
-                + consultarSaldo(indice));
+    public void imprimirSaldo(double saldo) {
+        System.out.println("El saldo de la cuenta es: " + saldo);
     }
 
 }
