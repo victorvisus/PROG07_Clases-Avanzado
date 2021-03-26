@@ -4,7 +4,7 @@ public interface IImprimir {
 
     //public abstract void listarCuentas();
 
-    public abstract String detallesCuenta();
+    public abstract String detallesCuenta(int indice);
 
     public abstract void imprimirSaldo(double saldo);
 

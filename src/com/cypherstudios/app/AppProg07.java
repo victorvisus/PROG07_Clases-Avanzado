@@ -1,5 +1,8 @@
 package com.cypherstudios.app;
 
+import com.cypherstudios.gestionCuenta.CodigoCuenta;
+import com.cypherstudios.gestionCuenta.CuentaBancaria;
+import com.cypherstudios.gestionCuenta.Persona;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,7 +11,19 @@ public class AppProg07 {
 
     static Scanner teclado = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+
+//        Persona t1 = new Persona("fer1", "uri1", "20/03/1978");
+//        CodigoCuenta ccc1 = new CodigoCuenta("01234567890123456789");
+//        CuentaBancaria c1 = new CuentaBancaria(t1, ccc1, 1000);
+//
+//        Persona t2 = new Persona("fer2", "uri2", "13/06/2000");
+//        CodigoCuenta ccc2 = new CodigoCuenta("01234567890123456789");
+//        CuentaBancaria c2 = new CuentaBancaria(t2, ccc2, 2000);
+//
+//        Persona t3 = new Persona("fer3", "uri3", "06/12/1956");
+//        CodigoCuenta ccc3 = new CodigoCuenta("01234567890123456789");
+//        CuentaBancaria c3 = new CuentaBancaria(t3, ccc3, 3000);
         appPrincipal();
     }
 
@@ -20,7 +35,7 @@ public class AppProg07 {
      * correspondiente.. Realiza esta acción mientras que el valor de "opción"
      * sea distinto de .....
      */
-    private static void appPrincipal() {
+    private static void appPrincipal() throws Exception {
         int opcion;
 
         do {
@@ -37,6 +52,13 @@ public class AppProg07 {
                 case 3:
                     //Obtener los datos de una cuenta concreta
 
+                    if (comprobarExisteCuenta()) {
+                        CuentaBancaria.listarCuentas();
+                        MenuApp.opcion03();
+                    } else {
+                        System.out.println("No existe ninguna cuenta almacenada");
+                    }
+
                     break;
                 case 4:
                     //Realizar un ingreso en una cuenta
@@ -48,8 +70,15 @@ public class AppProg07 {
                     break;
                 case 6:
                     //Consultar el saldo actual de una cuenta
+                    if (comprobarExisteCuenta()) {
+                        CuentaBancaria.listarCuentas();
+                        MenuApp.opcion06();
+                    } else {
+                        System.out.println("No existe ninguna cuenta almacenada");
+                    }
 
                     break;
+
                 case 7:
 
                     System.out.println("Hasta pronto!");
@@ -59,7 +88,7 @@ public class AppProg07 {
             if (opcion != 7) {
                 // Pausar la salida por pantalla
                 System.out.print(
-                        "\n******************************** Operación finalizada."
+                        "\n******************************** Operación finalizada. ***********"
                         + "\n******************************** PULSE INTRO PARA CONTINUAR ******\n"
                 );
                 try {
@@ -123,6 +152,7 @@ public class AppProg07 {
         return opcion;
     }
 
+    // Métodos para realizar comprobaciones //
     /**
      * Método que comprueba si el valor introducido esta en el rango de las
      * opciones del menú principal ( de 1 a 7 )
@@ -137,6 +167,16 @@ public class AppProg07 {
                     + "Por favor selecciona una de las opciones indicadas."
             );
         }
+    }
+
+    private static boolean comprobarExisteCuenta() throws Exception {
+
+        boolean continuar = false;
+        if (!CuentaBancaria.cuentasClientes.isEmpty()) {
+            continuar = true;
+        }
+
+        return continuar;
     }
 
 }

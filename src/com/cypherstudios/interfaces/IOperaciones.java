@@ -16,6 +16,6 @@ public interface IOperaciones {
 
     public abstract void retirarEfectivo();
 
-    //public double consultarSaldo(int indice);
+    public void consultarSaldo(int indice);
 
 }
