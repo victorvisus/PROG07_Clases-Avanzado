@@ -69,7 +69,14 @@ public class CodigoCuenta {
      */
     @Override
     public String toString() {
-        return "CodigoCuenta{" + "codEntidad=" + codEntidad + ", codOficina=" + codOficina + ", digControl=" + digControl + ", numCuenta=" + numCuenta + "\ncodCompleto=" + codCompleto + '}';
+        //return "CodigoCuenta{" + "codEntidad=" + codEntidad + ", codOficina=" + codOficina + ", digControl=" + digControl + ", numCuenta=" + numCuenta + "\ncodCompleto=" + codCompleto + '}';
+
+        return "\n-+ NÚMERO DE CUENTA ++++++-"
+                + "\n----------------------------"
+                + "\n+ Entidad .................. " + this.codEntidad
+                + "\n+ Oficina .................. " + this.codOficina
+                + "\n+ Dígito de control ........ " + this.digControl
+                + "\n+ Número de cuenta ......... " + this.numCuenta + "\n";
     }
 
     public static boolean validarCCC(String codCompleto) {

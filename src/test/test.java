@@ -26,24 +26,44 @@ public class test {
         CuentaBancaria c3 = new CuentaBancaria(t3, ccc3, 3000);
         //CuentaBancaria.imprimirCuentas();
 
-        CuentaBancaria.listarCuentas();
 
-        System.out.println("¿de qué cuenta quieres saber el saldo?"
-                + "\nDime el nombre del titular:");
-        int idCuenta = consola.nextInt();
+//        CuentaBancaria.listarCuentas();
+//
+//        System.out.println("¿de qué cuenta quieres saber el saldo?"
+//                + "\nDime el nombre del titular:");
+//        String nombreTit = consola.nextLine();
+//        nombreTit = nombreTit.toUpperCase().trim();
+//
+//        System.out.println(CuentaBancaria.buscarCuenta(nombreTit));
+//
+//        int indice = CuentaBancaria.buscarCuenta(nombreTit);
+//        if (indice == -1) {
+//            System.out.println("La cuenta no existe");
+//        } else {
+//
+//        }
 
+//        CuentaBancaria.listarCuentas();
+//
+//        System.out.println("¿de qué cuenta quieres saber el saldo?"
+//                + "\nDime el nombre del titular:");
+//        int idCuenta = consola.nextInt();
+//
+//
+//        //CuentaBancaria.buscarCuenta(nombreTit);
+//        System.out.println(CuentaBancaria.buscarCuenta(idCuenta));
+//
+//        int indice = CuentaBancaria.buscarCuenta(idCuenta);
+//        if (indice == -1) {
+//            System.out.println("La cuenta no existe");
+//        } else {
+//
+//        }
 
-        //CuentaBancaria.buscarCuenta(nombreTit);
-        System.out.println(CuentaBancaria.buscarCuenta(idCuenta));
-
-        int indice = CuentaBancaria.buscarCuenta(idCuenta);
-        if (indice == -1) {
-            System.out.println("La cuenta no existe");
-        } else {
-
-        }
 
 
         //CuentaBancaria.cuentasClientes.get(2).consultarSaldo(CuentaBancaria.buscarCuenta("fer3"));
+        System.out.println(
+                c3.toString());
     }
 }
