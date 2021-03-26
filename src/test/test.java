@@ -30,13 +30,13 @@ public class test {
 
         System.out.println("¿de qué cuenta quieres saber el saldo?"
                 + "\nDime el nombre del titular:");
-        String nombreTit = consola.nextLine();
-        nombreTit = nombreTit.toUpperCase().trim();
+        int idCuenta = consola.nextInt();
+
 
         //CuentaBancaria.buscarCuenta(nombreTit);
-        System.out.println(CuentaBancaria.buscarCuenta(nombreTit));
+        System.out.println(CuentaBancaria.buscarCuenta(idCuenta));
 
-        int indice = CuentaBancaria.buscarCuenta(nombreTit);
+        int indice = CuentaBancaria.buscarCuenta(idCuenta);
         if (indice == -1) {
             System.out.println("La cuenta no existe");
         } else {
