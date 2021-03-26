@@ -49,14 +49,12 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
      *
      * @return int : número de posición en el que se encuentra. -1 si no existe
      */
-    public static int buscarCuenta(String nombreTit) {
+    public static int buscarCuenta(int idCuenta) {
 
         //String titular = "fer1";
         int indice = -1;
         for (int i = 0; i < cuentasClientes.size(); i++) {
-            System.out.println("Nombre indice " + i + ": "
-                    + cuentasClientes.get(i).titular.getNombre());
-            if (cuentasClientes.get(i).titular.getNombre() == nombreTit) {
+            if (cuentasClientes.get(i).getIdCuenta() == idCuenta) {
                 indice = i;
             }
         }
