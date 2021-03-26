@@ -1,5 +1,7 @@
 package com.cypherstudios.gestionCuenta;
 
+import com.cypherstudios.interfaces.*;
+
 public class Persona {
 
     private String nombre;
@@ -38,7 +40,11 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "nombre: " + nombre + ", apellidos: " + apellidos + ", fecha_nac: " + fecha_nac + '}';
+        //return "Persona{" + "nombre: " + this.nombre + ", apellidos: " + this.apellidos + ", fecha_nac: " + this.fecha_nac + '}';
+        return "\n-+ TITULAR DE LA CUENTA +++-"
+                + "\n----------------------------"
+                + "\n+ Nombre ................... " + this.nombre
+                + "\n+ Apellidos ................ " + this.apellidos
+                + "\n+ Fecha de nacimiento: ..... " + this.fecha_nac + "\n";
     }
-
 }

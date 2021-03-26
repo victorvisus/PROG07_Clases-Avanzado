@@ -61,7 +61,6 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
             }
         }
 
-
         return indice;
 
     }
@@ -69,7 +68,11 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
     // Implementación de métodos
     @Override
     public String toString() {
-        return "CuentaBancaria{" + "idCuenta= " + this.idCuenta + "\ntitular=" + titular.toString() + "\ncodCuentaCliente=" + codCuentaCliente.toString() + "\nsaldo=" + this.saldo + '}';
+        //return "CuentaBancaria{" + "idCuenta= " + this.idCuenta + "\ntitular=" + titular.toString() + "\ncodCuentaCliente=" + codCuentaCliente.toString() + "\nsaldo=" + this.saldo + '}';
+        return "ID de la cuenta: " + this.idCuenta
+                + titular.toString()
+                + codCuentaCliente.toString()
+                + "Saldo de la cuenta: " + this.saldo;
     }
 
     // Interface IOperaciones
