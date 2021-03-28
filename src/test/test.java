@@ -1,6 +1,7 @@
 package test;
 
 import com.cypherstudios.gestionCuenta.CodigoCuenta;
+import com.cypherstudios.gestionCuenta.CuentaAhorro;
 import com.cypherstudios.gestionCuenta.CuentaBancaria;
 import com.cypherstudios.gestionCuenta.Persona;
 
@@ -24,26 +25,19 @@ public class test {
         Persona t3 = new Persona("fer3", "uri3", "06/12/1956");
         CodigoCuenta ccc3 = new CodigoCuenta("01234567890123456789");
         CuentaBancaria c3 = new CuentaBancaria(t3, ccc3, 3000);
-        //CuentaBancaria.imprimirCuentas();
+
+        Persona t4 = new Persona("fer4", "uri4", "01/01/1956");
+        CodigoCuenta ccc4 = new CodigoCuenta("01234567890123456789");
+        CuentaBancaria c4 = new CuentaAhorro(t3, ccc3, 4000, 12.00);
 
 
-        CuentaBancaria.listarCuentas();
 
-        System.out.println("¿de qué cuenta quieres saber el saldo?"
-                + "\nDime el nombre del titular:");
-        int idCuenta = consola.nextInt();
+        //CuentaBancaria.previewCuentas();
 
-        //CuentaBancaria.buscarCuenta(nombreTit);
-        System.out.println(CuentaBancaria.buscarCuenta(idCuenta));
+        for (CuentaBancaria aux : CuentaBancaria.cuentasClientes) {
 
-        int indice = CuentaBancaria.buscarCuenta(idCuenta);
-        if (indice == -1) {
-            System.out.println("La cuenta no existe");
-        } else {
+            aux.listarCuentas(aux);
 
         }
-
-        System.out.println("El saldo es: " + CuentaBancaria.cuentasClientes.get(indice).getSaldo());
-        //System.out.println(c3.toString());
     }
 }

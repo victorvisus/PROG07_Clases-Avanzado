@@ -5,9 +5,9 @@
         <group>
             <file>file:/H:/CFGSDAM-Proyectos/PROG07_Clases-Avanzado/src/com/cypherstudios/app/AppProg07.java</file>
             <file>file:/H:/CFGSDAM-Proyectos/PROG07_Clases-Avanzado/src/com/cypherstudios/app/MenuApp.java</file>
-            <file>file:/H:/CFGSDAM-Proyectos/PROG07_Clases-Avanzado/src/com/cypherstudios/interfaces/IImprimir.java</file>
-            <file>file:/H:/CFGSDAM-Proyectos/PROG07_Clases-Avanzado/src/com/cypherstudios/interfaces/IOperaciones.java</file>
             <file>file:/H:/CFGSDAM-Proyectos/PROG07_Clases-Avanzado/src/com/cypherstudios/gestionCuenta/CuentaBancaria.java</file>
+            <file>file:/H:/CFGSDAM-Proyectos/PROG07_Clases-Avanzado/src/com/cypherstudios/gestionCuenta/Persona.java</file>
+            <file>file:/H:/CFGSDAM-Proyectos/PROG07_Clases-Avanzado/src/com/cypherstudios/gestionCuenta/CuentaAhorro.java</file>
         </group>
     </open-files>
 </project-private>

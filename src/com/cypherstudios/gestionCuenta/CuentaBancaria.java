@@ -2,8 +2,6 @@ package com.cypherstudios.gestionCuenta;
 
 import com.cypherstudios.interfaces.IImprimir;
 import com.cypherstudios.interfaces.IOperaciones;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 public class CuentaBancaria implements IOperaciones, IImprimir {
 
@@ -13,11 +11,19 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
     protected int idCuenta;
     private static int contador;
 
+    /**
+     * Constructor de Clase. Una vez instanciada la clase, llama al método que
+     * se encarga de almacenar en el ArrayList el objeto que se cree
+     *
+     * @param titular : Objeto de tipo Persona, recibe nombre, apellidos y
+     * fecha_nac
+     * @param codigoCuenta : Tipo CodigoCuenta, recibe el número de cuenta.
+     * @param saldo : double, recibe el saldo inicial de la cuenta.
+     */
     public CuentaBancaria(Persona titular, CodigoCuenta codigoCuenta, double saldo) {
         this.titular = titular;
         this.codCuentaCliente = codigoCuenta;
         this.saldo = saldo;
-
         this.idCuenta = ++CuentaBancaria.contador;
 
         almacenarCuenta(this);
@@ -37,10 +43,14 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
 
     // Métodos de la Clase CuentaBancaria
     /**
+     * Imprime una lista de todas las cuentas almacenadas en el Arraylist. Es un
+     * método de clase porque no opera con ninguna instancia en concreto.
+     *
+     * Mediante un bucle for each recorre el ArrayList extrayendo los datos
+     * indicados.
      *
      */
-    public static void listarCuentas() {
-
+    public static void previewCuentas() {
         System.out.println("En el sistema existen las siguientes cuentas:");
 
         for (CuentaBancaria aux : cuentasClientes) {
@@ -52,8 +62,10 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
     }
 
     /**
-     * Busca la posición de la cuenta con la que queremos operar
+     * Busca la posición de la cuenta con la que queremos operar. Es static por
+     * que no pertenece a ninguna instancia, si no que es un método de clase
      *
+     * @param idCuenta: recibe el ID de la cuenta con la que se quiere operar.
      * @return int : número de posición en el que se encuentra. -1 si no existe
      */
     public static int buscarCuenta(int idCuenta) {
@@ -71,9 +83,9 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
     // Implementación de métodos
     @Override
     public String toString() {
-        //return "CuentaBancaria{" + "idCuenta= " + this.idCuenta + "\ntitular=" + titular.toString() + "\ncodCuentaCliente=" + codCuentaCliente.toString() + "\nsaldo=" + this.saldo + '}';
-        return "-+++ ID de la cuenta: " + this.idCuenta + " ++++-"
-                + "\n----------------------------\n"
+
+        return "\n-+++ ID de la cuenta: " + this.idCuenta + " +++-"
+                + "\n----------------------------"
                 + titular.toString()
                 + codCuentaCliente.toString()
                 + "\n----------------------------------------\n"
@@ -88,16 +100,11 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
         cuentasClientes.add(this);
     }
 
-    @Override
-    public ArrayList leerCuenta() {
-        // Abrá que pasarle algo que identifique la cuenta que queremos leer
-        return cuentasClientes;
-    }
-
     //Tienen que recibir el idCuenta o los 4 últimos digitos de la cuenta que se quiera leer
     @Override
     public void ingresarEfectivo() {
         System.out.println("Pendiente implementar");
+
     }
 
     @Override
@@ -105,6 +112,7 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
         System.out.println("Pendiente implementar");
     }
 
+    //Interface: IImprimir
     /**
      *
      * @param indice
@@ -113,11 +121,10 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
     public void consultarSaldo(int indice) {
         System.out.println("El saldo de la cuenta con ID "
                 + cuentasClientes.get(indice).getIdCuenta() + " es: "
-                + CuentaBancaria.cuentasClientes.get(indice).getSaldo());
-
+                + CuentaBancaria.cuentasClientes.get(indice).getSaldo() + " €"
+        );
     }
 
-    //Interface: IImprimir
     @Override
     public String detallesCuenta(int indice) {
         // Abrá que pasarle algo que identifique la cuenta que queremos leer
@@ -125,10 +132,14 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
     }
 
     @Override
-    public void imprimirSaldo(double saldo) {
-        System.out.println("El saldo de la cuenta es: " + saldo);
+    public void listarCuentas(CuentaBancaria aux) {
 
-        //Si existe el método consultarSaldo() este método NO es Necesario
+        //aux = (CuentaBancaria) aux;
+        System.out.println("ID Cuenta: " + aux.getIdCuenta()
+                + "; CCC: " + aux.codCuentaCliente.getCodCompleto()
+                + "; Titular: " + aux.titular.getNombre() + " " + aux.titular.getApellidos()
+                + "; Saldo: " + aux.getSaldo()
+        );
     }
 
 }
