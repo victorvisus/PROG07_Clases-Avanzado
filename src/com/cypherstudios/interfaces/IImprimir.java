@@ -1,11 +1,13 @@
 package com.cypherstudios.interfaces;
 
+import com.cypherstudios.gestionCuenta.CuentaBancaria;
+
 public interface IImprimir {
 
-    //public abstract void listarCuentas();
+    public abstract void listarCuentas(CuentaBancaria aux);
 
-    public abstract String detallesCuenta();
+    public abstract String detallesCuenta(int indice);
 
-    public abstract void imprimirSaldo(double saldo);
+    public void consultarSaldo(int indice);
 
 }

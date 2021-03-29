@@ -9,13 +9,9 @@ public interface IOperaciones {
 
     public abstract void almacenarCuenta(CuentaBancaria cuenta);
 
-    public abstract ArrayList<CuentaBancaria> leerCuenta();
-
-    //Tienen que recibir el idCuenta o los 4 últimos digitos de la cuenta que se quiera leer
     public abstract void ingresarEfectivo();
 
     public abstract void retirarEfectivo();
 
-    //public double consultarSaldo(int indice);
 
 }
