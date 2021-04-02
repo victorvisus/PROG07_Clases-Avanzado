@@ -1,9 +1,6 @@
 package com.cypherstudios.app;
 
-import com.cypherstudios.gestionCuenta.CodigoCuenta;
-import com.cypherstudios.gestionCuenta.CuentaAhorro;
 import com.cypherstudios.gestionCuenta.CuentaBancaria;
-import com.cypherstudios.gestionCuenta.Persona;
 import static com.cypherstudios.interfaces.IOperaciones.cuentasClientes;
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -14,26 +11,22 @@ public class AppProg07 {
     static Scanner teclado = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-
-        Persona t1 = new Persona("fer1", "uri1", "20/03/1978");
-        CodigoCuenta ccc1 = new CodigoCuenta("01234567890123456789");
-        CuentaBancaria c1 = new CuentaBancaria(t1, ccc1, 1000);
-
-        Persona t2 = new Persona("fer2", "uri2", "13/06/2000");
-        CodigoCuenta ccc2 = new CodigoCuenta("01234567890123456789");
-        CuentaBancaria c2 = new CuentaBancaria(t2, ccc2, 2000);
-
-        Persona t3 = new Persona("fer3", "uri3", "06/12/1956");
-        CodigoCuenta ccc3 = new CodigoCuenta("01234567890123456789");
-        CuentaBancaria c3 = new CuentaBancaria(t3, ccc3, 3000);
-
-        Persona t4 = new Persona("fer4", "uri4", "01/01/1956");
-        CodigoCuenta ccc4 = new CodigoCuenta("01234567890123456789");
-        CuentaBancaria c4 = new CuentaAhorro(t4, ccc4, 4000, 12.00);
-
-        Persona t5 = new Persona("fer5", "uri5", "23/02/1976");
-        CodigoCuenta ccc5 = new CodigoCuenta("01234567890123456789");
-        CuentaBancaria c5 = new CuentaAhorro(t5, ccc5, 5000, 12.00);
+//
+//        Persona t4 = new Persona("fer4", "uri4", "01/01/1956");
+//        CodigoCuenta ccc4 = new CodigoCuenta("01234567890123456789");
+//        CuentaBancaria c4 = new CuentaAhorro(t4, ccc4, 4000, 12.00);
+//
+//        Persona t5 = new Persona("fer5", "uri5", "23/02/1976");
+//        CodigoCuenta ccc5 = new CodigoCuenta("01234567890123456789");
+//        CuentaBancaria c5 = new CuentaAhorro(t5, ccc5, 5000, 12.00);
+//
+//        Persona t6 = new Persona("fer5", "uri5", "23/05/1995");
+//        CodigoCuenta ccc6 = new CodigoCuenta("01234567890123456789");
+//        CuentaBancaria c6 = new CtaPersonal(t6, ccc6, 2000, 12);
+//
+//        Persona t7 = new Persona("fer7", "uri7", "30/07/1987");
+//        CodigoCuenta ccc7 = new CodigoCuenta("01234567890123456789");
+//        CuentaBancaria c7 = new CtaEmpresa(t7, ccc7, 20000, 1000, 10, 30);
 
         appPrincipal();
     }
@@ -118,29 +111,16 @@ public class AppProg07 {
 
         do {
             tipoCuenta = menuApertura();
-            switch (tipoCuenta) {
-                case 1:
-                    System.out.println("Tipo Cuenta Ahorro");
-                    break;
-                case 2:
-                    System.out.println("Tipo Cuenta Corriente Personal");
-                    break;
-
-                case 3:
-                    System.out.println("Tipo Cuenta Corriente Empresa");
-                    break;
-
-                case 4:
-                    //"Rompe" la ejecución del switch y del bucle do-while, volviendo al "menú principal"
-                    break;
-
-                case 5:
-                    System.out.println("Hasta pronto!");
-                    System.exit(0);
-                    break;
+            if (tipoCuenta == 1 || tipoCuenta == 2 || tipoCuenta == 3) {
+                MenuApp.opcion01(tipoCuenta);
+            } else if (tipoCuenta == 5) {
+                System.out.println("Hasta pronto!");
+                System.exit(0);
+            } else {
+                System.out.println("Volvemos al menú anterior");
             }
-
         } while (tipoCuenta == 1 || tipoCuenta == 2 || tipoCuenta == 3);
+
     }
 
     // Impresión de menús

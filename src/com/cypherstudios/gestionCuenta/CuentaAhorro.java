@@ -1,11 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cypherstudios.gestionCuenta;
-
-import com.cypherstudios.interfaces.*;
 
 /**
  *
@@ -35,40 +28,11 @@ public class CuentaAhorro extends CuentaBancaria {
     @Override
     public String toString() {
         return super.toString()
-                + "-+++ TIPO DE INTERÉS ......: " + tipoInteres + " % ++-"
-                + "\n----------------------------------------\n";
+                + "-+++ TIPO DE INTERÉS ...........: " + tipoInteres + " %"
+                + "\n--------------------------------------------\n";
     }
 
-//    // Hereda IOperaciones de CuentaBancaria
-//    @Override
-//    public void almacenarCuenta(CuentaBancaria cuenta) {
-//        cuentasClientes.add(this);
-//    }
-//
-//    //Tienen que recibir el idCuenta o los 4 últimos digitos de la cuenta que se quiera leer
-//    @Override
-//    public void ingresarEfectivo() {
-//        System.out.println("Pendiente implementar");
-//    }
-//
-//    @Override
-//    public void retirarEfectivo() {
-//        System.out.println("Pendiente implementar");
-//    }
-//
-//    //Hereda: IImprimir de CuentaBancaria
-//    /**
-//     *
-//     * @param indice
-//     */
-////    @Override
-////    public void consultarSaldo(int indice) {
-////        System.out.println("El saldo de la cuenta con ID "
-////                + cuentasClientes.get(indice).getIdCuenta() + " es: "
-////                + CuentaAhorro.cuentasClientes.get(indice).getSaldo() + " €"
-////        );
-////
-////    }
+    // Hereda las clases Interface de su "clase padre" CuentaBancaria. //
 
     @Override
     public String detallesCuenta(int indice) {
@@ -87,13 +51,6 @@ public class CuentaAhorro extends CuentaBancaria {
      */
     @Override
     public void listarCuentas(CuentaBancaria aux) {
-
-//        CuentaAhorro ca1;
-//        double interes = 0d;
-//        if (aux instanceof CuentaAhorro) {
-//            ca1 = (CuentaAhorro) aux;
-//            interes = ((CuentaAhorro) aux).getTipoInteres();
-//        }
 
         System.out.println("ID Cuenta: " + aux.getIdCuenta()
                 + "; CCC: " + aux.codCuentaCliente.getCodCompleto()
