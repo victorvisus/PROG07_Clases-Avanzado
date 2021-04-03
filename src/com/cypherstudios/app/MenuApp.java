@@ -3,8 +3,6 @@ package com.cypherstudios.app;
 import static com.cypherstudios.app.AppProg07.teclado;
 import com.cypherstudios.gestionCuenta.*;
 import java.util.InputMismatchException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -164,11 +162,14 @@ public class MenuApp {
                 importe = introducirImporte();
                 saldo = CuentaBancaria.cuentasClientes.get(indice).getSaldo();
 
-                comprobarSaldo(saldo, importe);
+                if (comprobarSaldo(saldo, importe)) {
+                    saldoAct = saldo - importe;
+                    CuentaBancaria.cuentasClientes.get(indice).setSaldo(saldoAct);
 
-                saldoAct = saldo - importe;
+                    System.out.println("El saldo actual de la cuenta es: "
+                            + CuentaBancaria.cuentasClientes.get(indice).getSaldo());
+                }
 
-                CuentaBancaria.cuentasClientes.get(indice).setSaldo(saldoAct);
             } catch (Exception e) {
                 //Captura el mensaje si no hay o no hay suficiente saldo.
                 System.out.println(e.getMessage());
@@ -294,29 +295,15 @@ public class MenuApp {
         }
     }
 
-    private static void comprobarSaldo(double saldo, double importe) throws Exception {
+    private static boolean comprobarSaldo(double saldo, double importe) throws Exception {
         if (saldo == 0 || importe > saldo) {
             System.out.println("Operación no disponible. "
                     + "\nNo tiene suficiente saldo disponible."
                     + "\nSu saldo actual es: " + saldo);
+            return false;
+        } else {
+            return true;
         }
-    }
 
-    /**
-     * Método que comprueba si el valor introducido esta en el rango de las
-     * opciones del menú principal ( de 1 a 7 )
-     *
-     * @param opcion : recibe el valor introducido por teclado
-     * @throws Exception : Devuelve un error si el valor introducido no existe
-     * en el menú de operaciones
-     */
-    public static void comprobarOpcion(int opcion, String[] menu) throws Exception {
-
-        if (opcion < 1 || opcion > menu.length - 3) {
-            throw new Exception("El valor introducido no es válido.\n"
-                    + "Por favor selecciona una de las opciones indicadas."
-                    + "Valores entre 1 y " + (menu.length - 3)
-            );
-        }
     }
 }

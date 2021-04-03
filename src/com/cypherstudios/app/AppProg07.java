@@ -11,22 +11,6 @@ public class AppProg07 {
     static Scanner teclado = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-//
-//        Persona t4 = new Persona("fer4", "uri4", "01/01/1956");
-//        CodigoCuenta ccc4 = new CodigoCuenta("01234567890123456789");
-//        CuentaBancaria c4 = new CuentaAhorro(t4, ccc4, 4000, 12.00);
-//
-//        Persona t5 = new Persona("fer5", "uri5", "23/02/1976");
-//        CodigoCuenta ccc5 = new CodigoCuenta("01234567890123456789");
-//        CuentaBancaria c5 = new CuentaAhorro(t5, ccc5, 5000, 12.00);
-//
-//        Persona t6 = new Persona("fer5", "uri5", "23/05/1995");
-//        CodigoCuenta ccc6 = new CodigoCuenta("01234567890123456789");
-//        CuentaBancaria c6 = new CtaPersonal(t6, ccc6, 2000, 12);
-//
-//        Persona t7 = new Persona("fer7", "uri7", "30/07/1987");
-//        CodigoCuenta ccc7 = new CodigoCuenta("01234567890123456789");
-//        CuentaBancaria c7 = new CtaEmpresa(t7, ccc7, 20000, 1000, 10, 30);
 
         appPrincipal();
     }
@@ -36,8 +20,16 @@ public class AppProg07 {
      *
      * Mediante un switch, y dependiendo del valor de la variable int opcion,
      * ejecuta un case u otro, dependiendo de cual llama al método del ejercicio
-     * correspondiente.. Realiza esta acción mientras que el valor de "opción"
-     * sea distinto de .....
+     * correspondiente, incluidos en la clase MenuApp. Realiza esta acción
+     * mientras que el valor de "opción" sea distinto de 7.
+     *
+     * En el caso 2 "Listar cuentas disponibles", mediante un foreach recorre el
+     * ArrayList (instanciado en la interfaz IOperaciones), en el que se
+     * almacenan las cuentas de los clientes. Mediante el método listarCuentas,
+     * al que le envia el objeto aux, en el cual almacena cada objeto del
+     * ArrayLis. Éste ArrayList esta instanciado en la interfaz IImprimir, que
+     * está implementada en la clase CuentaBancaria imprime el contenido del
+     * ArrayList
      */
     private static void appPrincipal() throws Exception {
         int opcion;
@@ -125,11 +117,12 @@ public class AppProg07 {
 
     // Impresión de menús
     /**
-     * Método para mostrar el menú que se solicita en la tarea. Primero imprime
-     * las opciones del menú, cada una con la numeración correspondiente al
-     * ejercicio, y solicita al usuario que introduzca el nº de ejercicio que
-     * quiere visualizar. Realiza esta acción hasta que el usuario indique que
-     * quiere salir.
+     * Método para mostrar el menú principal del programa.
+     *
+     * El texto del menú esta almacenado en un array de Strings, y se imprime
+     * mediante un foreach.
+     *
+     * Solicita al usuario la tarea que quiere realizar y
      *
      * @return opcion : devuelve el valor de "opcion" para ejecutar el switch en
      * el método appPrincipal()
@@ -163,7 +156,7 @@ public class AppProg07 {
                 System.out.println("Escoge una opción del menú: ");
 
                 opcion = teclado.nextInt();
-                MenuApp.comprobarOpcion(opcion, menuPal);
+                comprobarOpcion(opcion, menuPal);
 
             } catch (InputMismatchException e) {
                 //Limpia el bufer de la clase Scanner, para que no entre en bucle
@@ -201,7 +194,7 @@ public class AppProg07 {
                 System.out.println("Elige la opción que prefieras: ");
 
                 tipoCuenta = teclado.nextInt();
-                MenuApp.comprobarOpcion(tipoCuenta, menuApert);
+                comprobarOpcion(tipoCuenta, menuApert);
 
             } catch (InputMismatchException e) {
                 //Limpia el bufer de la clase Scanner, para que no entre en bucle
@@ -216,5 +209,23 @@ public class AppProg07 {
 
         return tipoCuenta;
 
+    }
+
+    /**
+     * Método que comprueba si el valor introducido esta en el rango de las
+     * opciones del menú principal ( de 1 a 7 )
+     *
+     * @param opcion : recibe el valor introducido por teclado
+     * @throws Exception : Devuelve un error si el valor introducido no existe
+     * en el menú de operaciones
+     */
+    private static void comprobarOpcion(int opcion, String[] menu) throws Exception {
+
+        if (opcion < 1 || opcion > menu.length - 3) {
+            throw new Exception("El valor introducido no es válido.\n"
+                    + "Por favor selecciona una de las opciones indicadas."
+                    + "Valores entre 1 y " + (menu.length - 3)
+            );
+        }
     }
 }
