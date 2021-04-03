@@ -3,6 +3,8 @@ package com.cypherstudios.app;
 import static com.cypherstudios.app.AppProg07.teclado;
 import com.cypherstudios.gestionCuenta.*;
 import java.util.InputMismatchException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -248,12 +250,18 @@ public class MenuApp {
         return titular;
     }
 
+    /**
+     * Solicita al usuario que introduzca el codigo de la cuenta y lo manda a
+     * validar. Realiza esta acción hasta que la validación n este ok
+     *
+     * @return codCuentaCliente : devuelve el objeto CodigoCuenta.
+     */
     private static CodigoCuenta solicitaCodigo() {
         String codCompleto;
 
         do {
             System.out.println("Introduce el numero de cuenta (20 digitos):");
-            codCompleto = teclado.nextLine();
+            codCompleto = teclado.nextLine().replaceAll("\\s", "");
         } while (!CodigoCuenta.validarCCC(codCompleto));
 
         CodigoCuenta codCuentaCliente = new CodigoCuenta(codCompleto);
