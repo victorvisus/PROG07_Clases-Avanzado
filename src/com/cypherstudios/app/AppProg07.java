@@ -6,10 +6,17 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * @author Victor
+ */
 public class AppProg07 {
 
     static Scanner teclado = new Scanner(System.in);
 
+    /**
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         appPrincipal();
