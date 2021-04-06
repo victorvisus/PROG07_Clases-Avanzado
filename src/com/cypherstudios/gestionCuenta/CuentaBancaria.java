@@ -3,7 +3,7 @@ package com.cypherstudios.gestionCuenta;
 import com.cypherstudios.interfaces.IImprimir;
 import com.cypherstudios.interfaces.IOperaciones;
 
-public class CuentaBancaria implements IOperaciones, IImprimir {
+public abstract class CuentaBancaria implements IOperaciones, IImprimir {
 
     protected Persona titular;
     protected CodigoCuenta codCuentaCliente;
@@ -84,13 +84,13 @@ public class CuentaBancaria implements IOperaciones, IImprimir {
     @Override
     public String toString() {
 
-        return "\n-+++ ID de la cuenta: " + this.idCuenta + " +++-"
-                + "\n----------------------------"
+        return "\n-+++++  ID de la cuenta: " + this.idCuenta + " +++++-"
+                + "\n---------------------------------"
                 + titular.toString()
                 + codCuentaCliente.toString()
-                + "\n----------------------------------------\n"
-                + "-+++ SALDO DISPONIBLE .....: " + this.saldo + " € +-"
-                + "\n----------------------------------------\n";
+                + "\n--------------------------------------------\n"
+                + "-+++ SALDO DISPONIBLE .....: " + this.saldo + " € +++++-"
+                + "\n--------------------------------------------\n";
 
     }
 

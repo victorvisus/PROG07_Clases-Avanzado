@@ -1,7 +1,7 @@
 package com.cypherstudios.app;
 
 import static com.cypherstudios.app.AppProg07.teclado;
-import com.cypherstudios.gestionCuenta.CuentaBancaria;
+import com.cypherstudios.gestionCuenta.*;
 import java.util.InputMismatchException;
 
 /**
@@ -19,8 +19,106 @@ public class MenuApp {
     private static boolean error = false;
 
     //Abrir una nueva cuenta
-    public static void opcion01() throws Exception {
+    public static void opcion01(int tipoCuenta) throws Exception {
+        boolean continua = false;
+        Persona titular;
+        CodigoCuenta codCuentaCliente;
+        double saldo = 0;
 
+        System.out.println("\n/*************** APERTURA DE CUENTA BANCARIA ****/\n");
+
+        if (tipoCuenta == 1) {
+            System.out.println("\n/**** CUENTA DE AHORRO ****/");
+
+            double tipoInteres = 0;
+            titular = solicitaTitular();
+            codCuentaCliente = solicitaCodigo();
+
+            while (continua == false) {
+                try {
+                    continua = true;
+                    System.out.println("Indicame el saldo de apertura");
+                    saldo = teclado.nextDouble();
+                    comprobarImporte(saldo);
+
+                    System.out.println("Indica el tipo de interes:");
+                    tipoInteres = teclado.nextDouble();
+                } catch (InputMismatchException e) {
+                    //Limpia el bufer de la clase Scanner, para que no entre en bucle
+                    teclado.nextLine();
+
+                    System.out.println("AVISO: Solo se admiten carácteres numéricos");
+                    continua = false;
+                }
+            }
+
+            CuentaBancaria ca = new CuentaAhorro(titular, codCuentaCliente, saldo, tipoInteres);
+        }
+
+        if (tipoCuenta == 2) {
+            System.out.println("\n/**** CUENTA CORRIENTE PERSONAL ****/");
+
+            double comision = 0;
+            titular = solicitaTitular();
+            codCuentaCliente = solicitaCodigo();
+
+            while (continua == false) {
+                try {
+                    continua = true;
+                    System.out.println("Indicame el saldo de apertura");
+                    saldo = teclado.nextDouble();
+                    comprobarImporte(saldo);
+
+                    System.out.println("Indica la comisión:");
+                    comision = teclado.nextDouble();
+                } catch (InputMismatchException e) {
+                    //Limpia el bufer de la clase Scanner, para que no entre en bucle
+                    teclado.nextLine();
+
+                    System.out.println("AVISO: Solo se admiten carácteres numéricos");
+                    continua = false;
+                }
+            }
+
+            CuentaBancaria ccp = new CtaPersonal(titular, codCuentaCliente, saldo, comision);
+        }
+
+        if (tipoCuenta == 3) {
+            System.out.println("CUENTA CORRIENTE EMPRESA");
+
+            double maxDescubierto = 0;
+            double tipoIntDesc = 0;
+            double comisionDesc = 0;
+            titular = solicitaTitular();
+            codCuentaCliente = solicitaCodigo();
+
+            while (continua == false) {
+                try {
+                    continua = true;
+                    System.out.println("Indicame el saldo de apertura");
+                    saldo = teclado.nextDouble();
+                    comprobarImporte(saldo);
+
+                    System.out.println("Indica el importe máximo permitido de descubierto:");
+                    maxDescubierto = teclado.nextDouble();
+
+                    System.out.println("Indica el tipo de interes por descubierto:");
+                    tipoIntDesc = teclado.nextDouble();
+
+                    System.out.println("Indica la comisión por descubierto:");
+                    comisionDesc = teclado.nextDouble();
+                } catch (InputMismatchException e) {
+                    //Limpia el bufer de la clase Scanner, para que no entre en bucle
+                    teclado.nextLine();
+
+                    System.out.println("AVISO: Solo se admiten carácteres numéricos");
+                    continua = false;
+                }
+            }
+
+            CuentaBancaria ccp = new CtaEmpresa(titular, codCuentaCliente, saldo,
+                    maxDescubierto, tipoIntDesc, comisionDesc);
+        }
 
     }
 
@@ -64,11 +162,14 @@ public class MenuApp {
                 importe = introducirImporte();
                 saldo = CuentaBancaria.cuentasClientes.get(indice).getSaldo();
 
-                comprobarSaldo(saldo, importe);
+                if (comprobarSaldo(saldo, importe)) {
+                    saldoAct = saldo - importe;
+                    CuentaBancaria.cuentasClientes.get(indice).setSaldo(saldoAct);
 
-                saldoAct = saldo - importe;
+                    System.out.println("El saldo actual de la cuenta es: "
+                            + CuentaBancaria.cuentasClientes.get(indice).getSaldo());
+                }
 
-                CuentaBancaria.cuentasClientes.get(indice).setSaldo(saldoAct);
             } catch (Exception e) {
                 //Captura el mensaje si no hay o no hay suficiente saldo.
                 System.out.println(e.getMessage());
@@ -129,6 +230,46 @@ public class MenuApp {
         return importe;
     }
 
+    private static Persona solicitaTitular() {
+        teclado.nextLine();
+
+        String nombre;
+        String apellidos;
+        String fecha_nac;
+
+        System.out.println("Introduce el nombre del titular:");
+        nombre = teclado.nextLine();
+
+        System.out.println("Introduce los apellidos del titular:");
+        apellidos = teclado.nextLine();
+
+        System.out.println("Introduce la fecha de nacimiento:");
+        fecha_nac = teclado.nextLine();
+
+        Persona titular = new Persona(nombre, apellidos, fecha_nac);
+
+        return titular;
+    }
+
+    /**
+     * Solicita al usuario que introduzca el codigo de la cuenta y lo manda a
+     * validar. Realiza esta acción hasta que la validación n este ok
+     *
+     * @return codCuentaCliente : devuelve el objeto CodigoCuenta.
+     */
+    private static CodigoCuenta solicitaCodigo() {
+        String codCompleto;
+
+        do {
+            System.out.println("Introduce el numero de cuenta (20 digitos):");
+            codCompleto = teclado.nextLine().replaceAll("\\s", "");
+        } while (!CodigoCuenta.validarCCC(codCompleto));
+
+        CodigoCuenta codCuentaCliente = new CodigoCuenta(codCompleto);
+
+        return codCuentaCliente;
+    }
+
     // Métodos para realizar comprobaciones //
     /**
      * Comprueba que la cuenta seleccionada existe
@@ -154,29 +295,15 @@ public class MenuApp {
         }
     }
 
-    private static void comprobarSaldo(double saldo, double importe) throws Exception {
+    private static boolean comprobarSaldo(double saldo, double importe) throws Exception {
         if (saldo == 0 || importe > saldo) {
             System.out.println("Operación no disponible. "
                     + "\nNo tiene suficiente saldo disponible."
                     + "\nSu saldo actual es: " + saldo);
+            return false;
+        } else {
+            return true;
         }
-    }
 
-    /**
-     * Método que comprueba si el valor introducido esta en el rango de las
-     * opciones del menú principal ( de 1 a 7 )
-     *
-     * @param opcion : recibe el valor introducido por teclado
-     * @throws Exception : Devuelve un error si el valor introducido no existe
-     * en el menú de operaciones
-     */
-    public static void comprobarOpcion(int opcion, String[] menu) throws Exception {
-
-        if (opcion < 1 || opcion > menu.length - 3) {
-            throw new Exception("El valor introducido no es válido.\n"
-                    + "Por favor selecciona una de las opciones indicadas."
-                    + "Valores entre 1 y " + (menu.length - 3)
-            );
-        }
     }
 }
