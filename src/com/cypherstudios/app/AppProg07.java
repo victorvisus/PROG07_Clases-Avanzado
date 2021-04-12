@@ -55,6 +55,11 @@ public class AppProg07 {
                     //Ver un listado de las cuentas disponibles (CCC, titular y Saldo)
                     System.out.println("\n/*********************** CUENTAS DISPONIBLES ****/\n");
 
+                    /**
+                     * Llama al método que se encarga de imprimir el listado de
+                     * cuentas almacenadas, dependiendo del tipo de cuenta que
+                     * este almacenada usara el método que corresponda
+                     */
                     for (CuentaBancaria aux : cuentasClientes) {
                         aux.listarCuentas(aux);
                     }
@@ -105,6 +110,18 @@ public class AppProg07 {
         } while (opcion != 7);
     }
 
+    /**
+     * Método que llama al método que carga el menú para elegir el tipo de
+     * cuenta. Dependiendo de la elección del usuario accederá al método
+     * encargado de crear el objeto del tipo correspondiente a la cuenta
+     * escogida - MenuApp.opcion01 -, volverá al menñu anterior o saldrá del
+     * programa
+     *
+     * Para realizar la creación del objeto le pasa al método opcion01() de la
+     * clase MenuApp la selección que haya realizado el usuario.
+     *
+     * @throws Exception
+     */
     private static void appAperturaCuenta() throws Exception {
         int tipoCuenta;
 

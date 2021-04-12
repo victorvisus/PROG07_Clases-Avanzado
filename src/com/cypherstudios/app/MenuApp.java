@@ -18,8 +18,22 @@ public class MenuApp {
     private static int indice;
     private static boolean error = false;
 
-    //Abrir una nueva cuenta
+    /**
+     *
+     * @param tipoCuenta : correspondiente al número de opcion elejido en el
+     * método menuApertura() de la clase AppProg07
+     *
+     * Usa los métodos solicitaTitular() y solicitaCodigo() que solicitan los
+     * datos, construyen y devuelven los objetos "titular" de tipo Persona y
+     * "codCuentaCliente" de tipo CodigoCuenta.
+     *
+     * Dependiendo del tipo de cuenta elejido solicitará los atributos
+     * característicos del tipo correspondiente.
+     *
+     * @throws Exception
+     */
     public static void opcion01(int tipoCuenta) throws Exception {
+        //Abrir una nueva cuenta
         boolean continua = false;
         Persona titular;
         CodigoCuenta codCuentaCliente;
@@ -122,6 +136,13 @@ public class MenuApp {
 
     }
 
+    /**
+     * Manda a seleccionar la cuenta por medio del método indicado, que devuelve
+     * el valor de la variable de clase "indice", el cual se usa para indicar de
+     * que cuenta se quieren extraer los datos.
+     *
+     * @throws Exception
+     */
     //Obtener los datos de una cuenta concreta
     public static void opcion03() throws Exception {
         System.out.println("\n/*************** OBTENER DATOS DE UNA CUENTA ****/\n");
@@ -187,6 +208,26 @@ public class MenuApp {
 
     }
 
+    /**
+     * Método para imprimir los datos de una cuenta concreta.
+     *
+     * Primero comprueba que hay alguna cuenta almacenada a través del método
+     * comprobarExisteCuenta()
+     *
+     * Imprime las cuentas existentes (id y nombre y apellidos del titual) y
+     * pregunta al usuario que cuenta quiere filtrar.
+     *
+     * Llama al método de la clase CuentaBancaria buscarCuentas y le pasa el id
+     * de la cuenta indicada por el usuario. Ese método se encarga de buscar la
+     * posición en la que se encuentra almacenada en el ArrayList la cuenta
+     * indicada y la devuelve.
+     *
+     * A través del método comprobarIndiceCuenta(pasandole el indice) comprueba
+     * que es correcto y devuelve una Exception si no lo es.
+     *
+     * @return indice : devuelve el indice para poder imprimir los datos.
+     * @throws Exception
+     */
     // Métodos para solicitar datos al usuario
     private static int seleccionarCuenta() throws Exception {
 
@@ -230,6 +271,12 @@ public class MenuApp {
         return importe;
     }
 
+    /**
+     * Solicita los atributos "nombre, apellidos y fecha_nac" y construye el
+     * objeto Persona titular.
+     *
+     * @return titular : objeto tipo Persona
+     */
     private static Persona solicitaTitular() {
         teclado.nextLine();
 
@@ -253,9 +300,10 @@ public class MenuApp {
 
     /**
      * Solicita al usuario que introduzca el codigo de la cuenta y lo manda a
-     * validar. Realiza esta acción hasta que la validación n este ok
+     * validar. Realiza esta acción hasta que la validación no este ok. Cuando
+     * todo esta correcto construye el objeto
      *
-     * @return codCuentaCliente : devuelve el objeto CodigoCuenta.
+     * @return codCuentaCliente : devuelve el objeto de tipo CodigoCuenta.
      */
     private static CodigoCuenta solicitaCodigo() {
         String codCompleto;
@@ -283,6 +331,11 @@ public class MenuApp {
         }
     }
 
+    /**
+     *
+     * @throws Exception : Si no hay ninguna cuenta almacenada lanza la
+     * Exception indicada. Si el ArrayList esta vacio.
+     */
     private static void comprobarExisteCuenta() throws Exception {
         if (CuentaBancaria.cuentasClientes.isEmpty()) {
             throw new Exception("No se ha encontrado ninguna cuenta en el sistema.\n");
