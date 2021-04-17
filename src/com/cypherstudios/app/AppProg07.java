@@ -1,7 +1,5 @@
 package com.cypherstudios.app;
 
-import com.cypherstudios.gestionCuenta.CuentaBancaria;
-import static com.cypherstudios.interfaces.IOperaciones.cuentasClientes;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -30,13 +28,7 @@ public class AppProg07 {
      * correspondiente, incluidos en la clase MenuApp. Realiza esta acción
      * mientras que el valor de "opción" sea distinto de 7.
      *
-     * En el caso 2 "Listar cuentas disponibles", mediante un foreach recorre el
-     * ArrayList (instanciado en la interfaz IOperaciones), en el que se
-     * almacenan las cuentas de los clientes. Mediante el método listarCuentas,
-     * al que le envia el objeto aux, en el cual almacena cada objeto del
-     * ArrayLis. Éste ArrayList esta instanciado en la interfaz IImprimir, que
-     * está implementada en la clase CuentaBancaria imprime el contenido del
-     * ArrayList
+     *
      */
     private static void appPrincipal() throws Exception {
         int opcion;
@@ -55,28 +47,17 @@ public class AppProg07 {
                     //Ver un listado de las cuentas disponibles (CCC, titular y Saldo)
                     System.out.println("\n/*********************** CUENTAS DISPONIBLES ****/\n");
 
-                    /**
-                     * Llama al método que se encarga de imprimir el listado de
-                     * cuentas almacenadas, dependiendo del tipo de cuenta que
-                     * este almacenada usara el método que corresponda
-                     */
-                    for (CuentaBancaria aux : cuentasClientes) {
-                        aux.listarCuentas(aux);
-                    }
+                    MenuApp.opcion02();
 
                     break;
                 case 3:
                     //Obtener los datos de una cuenta concreta
-
                     MenuApp.opcion03();
 
                     break;
                 case 4:
                     //Realizar un ingreso en una cuenta
-
-                    System.out.println("El saldo actual de la cuenta es: "
-                            + MenuApp.opcion04()
-                    );
+                    MenuApp.opcion04();
 
                     break;
                 case 5:

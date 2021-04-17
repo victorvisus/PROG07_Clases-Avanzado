@@ -92,7 +92,7 @@ public abstract class CuentaBancaria implements IOperaciones, IImprimir {
 
     }
 
-    // Implementación de métodos
+    // Implementación de métodos //
     @Override
     public String toString() {
 
@@ -111,10 +111,14 @@ public abstract class CuentaBancaria implements IOperaciones, IImprimir {
         cuentasClientes.add(this);
     }
 
+    /**
+     * Realiza la operación de ingresar saldo en la cuenta
+     *
+     * @param importe
+     * @return double : devuelve el saldo después de realizar la operación
+     */
     @Override
     public double ingresarEfectivo(double importe) {
-//        //System.out.println("Pendiente implementar");
-
         double saldoAnt = this.getSaldo();
         double saldoAct = saldoAnt + importe;
         this.setSaldo(saldoAct);
@@ -122,6 +126,15 @@ public abstract class CuentaBancaria implements IOperaciones, IImprimir {
         return saldoAct;
     }
 
+    /**
+     * Realiza la operación de retirar saldo en la cuenta.
+     *
+     * Antes de realizar esta acción comprueba si el saldo disponible en la
+     * cuenta es suficiente
+     *
+     * @param importe
+     * @return double : devuelve el saldo después de realizar la operación
+     */
     @Override
     public double retirarEfectivo(double importe) {
         System.out.println("Pendiente implementar");
@@ -139,8 +152,8 @@ public abstract class CuentaBancaria implements IOperaciones, IImprimir {
                     saldoAct = saldoDisp - importe;
                     this.setSaldo(saldoAct);
 
-                    System.out.println("El saldo actual de la cuenta es: "
-                            + this.getSaldo());
+//                    System.out.println("El saldo actual de la cuenta es: "
+//                            + this.getSaldo());
                 }
 
             } catch (Exception e) {
@@ -155,6 +168,7 @@ public abstract class CuentaBancaria implements IOperaciones, IImprimir {
 
     //Interface: IImprimir
     /**
+     * Imprime el saldo de la cuenta de la cual recibe
      *
      * @param indice
      */

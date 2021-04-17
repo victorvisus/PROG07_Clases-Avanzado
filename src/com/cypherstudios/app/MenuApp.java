@@ -2,6 +2,7 @@ package com.cypherstudios.app;
 
 import static com.cypherstudios.app.AppProg07.teclado;
 import com.cypherstudios.gestionCuenta.*;
+import static com.cypherstudios.interfaces.IOperaciones.cuentasClientes;
 import java.util.InputMismatchException;
 
 /**
@@ -15,8 +16,9 @@ public class MenuApp {
      * devuelva el método seleccionarCuenta() cuando sea llamado por las
      * distintas opciones del menú
      */
-    private static int indice;
+    private static int indice = -1;
     private static boolean error = false;
+    private static String avisoVolver = "Volvemos al menú principal";
 
     /**
      *
@@ -137,6 +139,31 @@ public class MenuApp {
     }
 
     /**
+     * Listar cuentas disponibles, mediante un foreach recorre el ArrayList
+     * (instanciado en la interfaz IOperaciones), en el que se almacenan las
+     * cuentas de los clientes. Mediante el método listarCuentas, al que le
+     * envia el objeto aux, en el cual almacena cada objeto del ArrayLis. Éste
+     * ArrayList esta instanciado en la interfaz IImprimir, que está
+     * implementada en la clase CuentaBancaria imprime el contenido del
+     * ArrayList
+     */
+    public static void opcion02() {
+        /**
+         * Llama al método que se encarga de imprimir el listado de cuentas
+         * almacenadas, dependiendo del tipo de cuenta que este almacenada usara
+         * el método que corresponda
+         */
+        try {
+            comprobarExisteCuenta();
+            for (CuentaBancaria aux : cuentasClientes) {
+                aux.listarCuentas(aux);
+            }
+        } catch (Exception e) {
+            System.out.println(avisoVolver);
+        }
+    }
+
+    /**
      * Manda a seleccionar la cuenta por medio del método indicado, que devuelve
      * el valor de la variable de clase "indice", el cual se usa para indicar de
      * que cuenta se quieren extraer los datos.
@@ -144,39 +171,59 @@ public class MenuApp {
      * @throws Exception
      */
     //Obtener los datos de una cuenta concreta
-    public static void opcion03() throws Exception {
+    public static void opcion03() {
         System.out.println("\n/*************** OBTENER DATOS DE UNA CUENTA ****/\n");
 
-        seleccionarCuenta();
-        System.out.println(
-                CuentaBancaria.cuentasClientes.get(indice).detallesCuenta(indice)
-        );
+        try {
+            seleccionarCuenta();
+
+            System.out.println(
+                    CuentaBancaria.cuentasClientes.get(indice).detallesCuenta(indice)
+            );
+        } catch (Exception e) {
+            System.out.println(avisoVolver);
+        }
     }
 
     //Realizar un ingreso en una cuenta
-    public static double opcion04() throws Exception {
+    public static void opcion04() {
         System.out.println("\n/************************* INGRESO EN CUENTA ****/\n");
-        seleccionarCuenta();
-        double importe = introducirImporte();
 
-        return CuentaBancaria.cuentasClientes.get(indice).ingresarEfectivo(importe);
+        seleccionarCuenta();
+
+        if (indice != -1) {
+            double importe = introducirImporte();
+
+            System.out.println("El saldo actual de la cuenta es: "
+                    + CuentaBancaria.cuentasClientes.get(indice).ingresarEfectivo(importe)
+            );
+        }
+
     }
 
     //Retirar efectivo de una cuenta
-    public static double opcion05() throws Exception {
-
+    public static void opcion05() {
+        double importe = 0;
         System.out.println("\n/********************** RETIRADA DE EFECTIVO ****/\n");
 
         seleccionarCuenta();
-        double importe = introducirImporte();
+        if (indice != -1) {
+            importe = introducirImporte();
 
-        return CuentaBancaria.cuentasClientes.get(indice).retirarEfectivo(importe);
+            System.out.println("El saldo actual de la cuenta es: "
+                    + CuentaBancaria.cuentasClientes.get(indice).retirarEfectivo(importe));
+        }
+        //return CuentaBancaria.cuentasClientes.get(indice).retirarEfectivo(importe);
     }
 
     //Consultar el saldo actual de una cuenta
-    public static void opcion06() throws Exception {
-        seleccionarCuenta();
-        CuentaBancaria.cuentasClientes.get(indice).consultarSaldo(indice);
+    public static void opcion06() {
+        try {
+            seleccionarCuenta();
+            CuentaBancaria.cuentasClientes.get(indice).consultarSaldo(indice);
+        } catch (Exception e) {
+            System.out.println(avisoVolver);
+        }
 
     }
 
@@ -198,10 +245,14 @@ public class MenuApp {
      * que es correcto y devuelve una Exception si no lo es.
      *
      * @return indice : devuelve el indice para poder imprimir los datos.
-     * @throws Exception
+     * @throws InputMismatchException : Lanza una Exception si el valor
+     * introducido no es un int
+     * @throws Exception : Lanza una Exception si la cuenta seleccionada no
+     * existe
+     *
      */
     // Métodos para solicitar datos al usuario
-    private static int seleccionarCuenta() throws Exception {
+    private static int seleccionarCuenta() {
 
         try {
             comprobarExisteCuenta();
@@ -219,7 +270,7 @@ public class MenuApp {
 
             System.out.println("AVISO: Solo se admiten carácteres numéricos");
         } catch (Exception e) {
-            //Captura el mensaje si el ID de la cuenta no existe
+            //Captura el mensaje si el ID de la cuenta no existe o si no hay cuentas en el sistema
             System.out.println(e.getMessage());
         }
 
