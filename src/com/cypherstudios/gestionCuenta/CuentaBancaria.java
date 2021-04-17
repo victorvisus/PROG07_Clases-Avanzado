@@ -80,6 +80,18 @@ public abstract class CuentaBancaria implements IOperaciones, IImprimir {
         return indice;
     }
 
+    protected boolean comprobarSaldo(double saldo, double importe) {
+        if (saldo == 0 || importe > saldo) {
+            System.out.println("Operación no disponible. "
+                    + "\nNo tiene suficiente saldo disponible."
+                    + "\nSu saldo actual es: " + saldo);
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     // Implementación de métodos
     @Override
     public String toString() {
@@ -91,7 +103,6 @@ public abstract class CuentaBancaria implements IOperaciones, IImprimir {
                 + "\n--------------------------------------------\n"
                 + "-+++ SALDO DISPONIBLE .....: " + this.saldo + " € +++++-"
                 + "\n--------------------------------------------\n";
-
     }
 
     // Interface IOperaciones
@@ -100,16 +111,46 @@ public abstract class CuentaBancaria implements IOperaciones, IImprimir {
         cuentasClientes.add(this);
     }
 
-    //Tienen que recibir el idCuenta o los 4 últimos digitos de la cuenta que se quiera leer
     @Override
-    public void ingresarEfectivo() {
-        System.out.println("Pendiente implementar");
+    public double ingresarEfectivo(double importe) {
+//        //System.out.println("Pendiente implementar");
 
+        double saldoAnt = this.getSaldo();
+        double saldoAct = saldoAnt + importe;
+        this.setSaldo(saldoAct);
+
+        return saldoAct;
     }
 
     @Override
-    public void retirarEfectivo() {
+    public double retirarEfectivo(double importe) {
         System.out.println("Pendiente implementar");
+
+        boolean error;
+        double saldoDisp;
+        double saldoAct = 0;
+        do {
+            try {
+                error = false;
+                //importe = introducirImporte();
+                saldoDisp = this.getSaldo();
+
+                if (comprobarSaldo(saldoDisp, importe)) {
+                    saldoAct = saldoDisp - importe;
+                    this.setSaldo(saldoAct);
+
+                    System.out.println("El saldo actual de la cuenta es: "
+                            + this.getSaldo());
+                }
+
+            } catch (Exception e) {
+                //Captura el mensaje si no hay o no hay suficiente saldo.
+                System.out.println(e.getMessage());
+                error = true;
+            }
+        } while (error);
+
+        return saldoAct;
     }
 
     //Interface: IImprimir

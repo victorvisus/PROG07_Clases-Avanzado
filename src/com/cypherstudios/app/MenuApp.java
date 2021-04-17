@@ -157,15 +157,9 @@ public class MenuApp {
     public static double opcion04() throws Exception {
         System.out.println("\n/************************* INGRESO EN CUENTA ****/\n");
         seleccionarCuenta();
-
         double importe = introducirImporte();
-        double saldoAnt = CuentaBancaria.cuentasClientes.get(indice).getSaldo();
 
-        double saldoAct = saldoAnt + importe;
-
-        CuentaBancaria.cuentasClientes.get(indice).setSaldo(saldoAct);
-
-        return saldoAct;
+        return CuentaBancaria.cuentasClientes.get(indice).ingresarEfectivo(importe);
     }
 
     //Retirar efectivo de una cuenta
@@ -174,31 +168,9 @@ public class MenuApp {
         System.out.println("\n/********************** RETIRADA DE EFECTIVO ****/\n");
 
         seleccionarCuenta();
-        double importe;
-        double saldo;
-        double saldoAct = 0;
-        do {
-            try {
-                error = false;
-                importe = introducirImporte();
-                saldo = CuentaBancaria.cuentasClientes.get(indice).getSaldo();
+        double importe = introducirImporte();
 
-                if (comprobarSaldo(saldo, importe)) {
-                    saldoAct = saldo - importe;
-                    CuentaBancaria.cuentasClientes.get(indice).setSaldo(saldoAct);
-
-                    System.out.println("El saldo actual de la cuenta es: "
-                            + CuentaBancaria.cuentasClientes.get(indice).getSaldo());
-                }
-
-            } catch (Exception e) {
-                //Captura el mensaje si no hay o no hay suficiente saldo.
-                System.out.println(e.getMessage());
-                error = true;
-            }
-        } while (error);
-
-        return saldoAct;
+        return CuentaBancaria.cuentasClientes.get(indice).retirarEfectivo(importe);
     }
 
     //Consultar el saldo actual de una cuenta
@@ -348,15 +320,4 @@ public class MenuApp {
         }
     }
 
-    private static boolean comprobarSaldo(double saldo, double importe) throws Exception {
-        if (saldo == 0 || importe > saldo) {
-            System.out.println("Operación no disponible. "
-                    + "\nNo tiene suficiente saldo disponible."
-                    + "\nSu saldo actual es: " + saldo);
-            return false;
-        } else {
-            return true;
-        }
-
-    }
 }

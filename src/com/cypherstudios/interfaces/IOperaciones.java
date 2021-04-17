@@ -9,9 +9,8 @@ public interface IOperaciones {
 
     public abstract void almacenarCuenta(CuentaBancaria cuenta);
 
-    public abstract void ingresarEfectivo();
+    public abstract double ingresarEfectivo(double importe);
 
-    public abstract void retirarEfectivo();
-
+    public abstract double retirarEfectivo(double importe) throws Exception;
 
 }
